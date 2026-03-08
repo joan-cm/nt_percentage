@@ -1,9 +1,28 @@
+#!/usr/bin/env python3
+
 # Includes Joan's v1 of script + Sonia's changes: IUPAC + modification script
 # References conditions code: https://www.w3schools.com/python/python_conditions.asp
 # Reference IUPAC code: https://www.bioinformatics.org/sms/iupac.html
+# References sys: https://www.w3schools.com/python/ref_module_sys.asp AND https://docs.python.org/3/library/sys.html
+
+
+## Libraries
+import sys
+from argparse import ArgumentParser
+
+## Argument parsing
+parser = ArgumentParser(description = 'Calculate nucleotide percentage') # description displayed in the help message
+parser.add_argument("-s", "--seq", type = str, required = True, help = "Input sequence") # as input, one argument is required and it needs to be a string
+
+
+
+
+
+
+## Run
 
 # Prepares sequence
-seq = seq.upper()  
+seq = seq.upper()
 
 # Computes counts and percentages
 # Adds IUPAC code
@@ -26,7 +45,7 @@ per_gap = round((num_gap / length) * 100, 1)
 # considers whether there are T and U in the same sequence: Mistake
 if "T" in seq and "U" in seq:
      print("Error: the input sequence is not valid since it contains both T and U.")
-     #sys.exit(1)
+     sys.exit(1)
 
 # for checking if bases are included within the IUPAC code
 nucleotides = {"A", "T", "C", "G", "U"}
