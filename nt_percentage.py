@@ -32,14 +32,13 @@ if "T" in seq and "U" in seq:
 nucleotides = {"A", "T", "C", "G", "U"}
 IUPAC = {"R", "Y", "S", "W", "K", "M", "B", "D", "H", "V", "N", ".", "-"}
 
-# identifies sequences that have bases in nucleotides and IUPAC
-# 
+# identifies sequences that have bases in nucleotides, IUPAC and in neither (will print an error for the last scenario, see below)
 # Check reference for the if statement
 IUPAC_sequence = (num_ambigous + num_gap) > 0
 nucleotides_sequence = (num_a + num_c + num_g + num_t + num_u) > 0
 bases_sequence = (IUPAC_sequence + nucleotides_sequence) > 0
 
-# Considers two scenarios: When there is a T or a U. 
+# Considers two scenarios: When there is a T or a U. Considers whether the sequence includes IUPAC bases or not.
 if "T" in seq:
     if IUPAC_sequence:
         print(f"DNA sequence with {per_a}% A, {per_c}% C, {per_g}% G, {per_t}% T, {per_ambigous}% ambigous bases, {per_gap}% gaps")
@@ -52,6 +51,7 @@ elif "U" in seq:
     else:
         print(f"RNA sequence with {per_a}% A, {per_c}% C, {per_g}% G, {per_u}% U")
 
+# No T and no U. Takes into account whether the bases are within nucleotides or IUPAC. Otherwise prints an error message.
 else:
     if bases_sequence == False:
         print(f"Error: the input sequence contains unexpected bases")
