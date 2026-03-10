@@ -4,33 +4,37 @@ SVH: Script fully working from the terminal --> I also corrected a previous mist
 
 Doc tests:
 
-python nt_percentage.py -s ACTGU
+python3 nt_percentage.py -s ACTGU
 
 PRINTS: Error: the input sequence is not valid since it contains both T and U
 
 
-python nt_percentage.py -s ACTGT
+python3 nt_percentage.py -s ACTGT
 
 PRINTS: DNA sequence with 20.0% A, 20.0% C, 20.0% G, 40.0% T
 
 
-python nt_percentage.py -s ACuGU
+python3 nt_percentage.py -s ACuGU
 
 PRINTS: RNA sequence with 20.0% A, 20.0% C, 20.0% G, 40.0% U
 
 
-python nt_percentage.py -s ACTGTTT.-.-
+python3 nt_percentage.py -s acgca
+
+PRINTS: Nucleic acid sequence with 40.0% A, 40.0% C, 20.0% G
+
+
+python3 nt_percentage.py -s ACTGTTT.-.-
 
 PRINTS: DNA sequence with 9.1% A, 9.1% C, 9.1% G, 36.4% T, 0.0% ambigous bases, 36.4% gaps
 
 
-python nt_percentage.py -s ACUGUNNNN.-.-
+python3 nt_percentage.py -s ACUGUNNNN.-.-
 
 PRINTS: RNA sequence with 7.7% A, 7.7% C, 7.7% G, 15.4% U, 30.8% ambigous bases, 30.8% gaps
 
 
-python nt_percentage.py -s ACUGU.-.-F
+python3 nt_percentage.py -s ACUGU.-.-F
 
 PRINTS: Error: the input sequence contains unexpected bases
-
 
