@@ -5,6 +5,7 @@
 # Reference IUPAC code: https://www.bioinformatics.org/sms/iupac.html
 # References sys: https://www.w3schools.com/python/ref_module_sys.asp AND https://docs.python.org/3/library/sys.html
 # References argparse: https://docs.python.org/es/3/library/argparse.html
+# Reference sum: https://www.geeksforgeeks.org/python/sum-function-python/
 
 ## Libraries
 import sys
@@ -66,9 +67,14 @@ IUPAC = {"R", "Y", "S", "W", "K", "M", "B", "D", "H", "V", "N", ".", "-"}
 # Check reference for the if statement
 IUPAC_sequence = (num_ambigous + num_gap) > 0
 nucleotides_sequence = (num_a + num_c + num_g + num_t + num_u) > 0
-bases_sequence = (IUPAC_sequence + nucleotides_sequence) > 0
+bases_sequence = sum([num_a, num_c, num_g, num_t, num_u, num_ambigous, num_gap]) != len(args.seq) # corrected the line. It was only applicable when the WHOLE sequence contained bases NOT included in nucleotides or IUPAC, but failing when the characters were mixed. This ensures that if the sum of the counts for each of the nucleootides or IUPAC bases is different from the length of the sequence, the value becomes TRUE
 
 # Considers two scenarios: When there is a T or a U. Considers whether the sequence includes IUPAC bases or not.
+# Correction # 2. Moved the if bases_sequences argument at the beggining, otherwise it was not working for sequences that had a mixed of nucleotides + IUPAC + UNEXPECTED bases (so from neither)
+if bases_sequence == True:
+    print(f"Error: the input sequence contains unexpected bases")
+    sys.exit(1)
+
 if "T" in args.seq:
     if IUPAC_sequence:
         print(f"DNA sequence with {per_a}% A, {per_c}% C, {per_g}% G, {per_t}% T, {per_ambigous}% ambigous bases, {per_gap}% gaps")
@@ -83,9 +89,7 @@ elif "U" in args.seq:
 
 # No T and no U. Takes into account whether the bases are within nucleotides or IUPAC. Otherwise prints an error message.
 else:
-    if bases_sequence == False:
-        print(f"Error: the input sequence contains unexpected bases")
-    elif IUPAC_sequence:
+    if IUPAC_sequence: # corrected, changed elif to if
         print(f"Nucleic acid sequence with {per_a}% A, {per_c}% C, {per_g}% G, {per_ambigous}% ambigous bases, {per_gap}% gaps")   
     else:
         print(f"Nucleic acid sequence with {per_a}% A, {per_c}% C, {per_g}% G")
